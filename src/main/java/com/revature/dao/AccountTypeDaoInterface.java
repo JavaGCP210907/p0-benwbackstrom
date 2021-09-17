@@ -2,6 +2,6 @@ package com.revature.dao;
 
 public interface AccountTypeDaoInterface {
 
-	public void updateInterestRate(int r);
+	public void updateInterestRate(int id, int r);
 	
 }
