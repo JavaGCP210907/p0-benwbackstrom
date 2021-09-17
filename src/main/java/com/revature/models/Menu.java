@@ -30,6 +30,7 @@ public class Menu {
 			//menu options
 			System.out.println("hi -> get greeted");
 			System.out.println("accounts -> show all accounts");
+			System.out.println("accounttypes -> show all types of accounts");
 			System.out.println("accountbyid -> get account with a certain id");
 			System.out.println("accountsbyname -> get accounts of certain person");
 			System.out.println("accountsbytype -> get accounts of a certaintype");
@@ -58,6 +59,16 @@ public class Menu {
 				
 				for (Account a : accounts) {
 					System.out.println(a);
+				}//end for
+				
+				break;
+			}//end case
+			
+			case "accounttypes":{
+				List<AccountType> atypes = atDao.getAccountTypes();
+				
+				for (AccountType at : atypes) {
+					System.out.println(at);
 				}//end for
 				
 				break;
@@ -173,6 +184,19 @@ public class Menu {
 				
 				break;
 			}
+			
+			case "updateinterest":{
+				System.out.println("Which type of account would you like to update the interest rate?");
+				String type = scan.nextLine();
+				
+				System.out.println("Enter new percent interest rate");
+				int r = scan.nextInt();
+				scan.nextLine();
+				
+				atDao.updateInterestRate(type, r);
+				
+				break;
+			}//end case
 			
 			case "exit":{
 				displayMenu = false;
