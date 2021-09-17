@@ -29,4 +29,8 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.18'
+	//This dependency will let us use JDBC
+	//so our Java can communicate with our PostgeSQL Database
 }
