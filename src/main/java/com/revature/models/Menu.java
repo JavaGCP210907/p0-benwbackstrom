@@ -3,13 +3,19 @@ package com.revature.models;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.dao.AccountDao;
 import com.revature.dao.AccountTypeDao;
+
+
 
 public class Menu {
 
 	AccountDao aDao = new AccountDao();
 	AccountTypeDao atDao = new AccountTypeDao();
+	Logger log = LogManager.getLogger(Menu.class); //Logger object so that we can implement Logging
 	
 	public void displayMenu() {
 		boolean displayMenu = true; //we're going to use this to toggle whether the menu continues after user input
@@ -61,6 +67,8 @@ public class Menu {
 					System.out.println(a);
 				}//end for
 				
+				log.info("USER RETRIVED LIST OF ALL ACCOUNTS");
+				
 				break;
 			}//end case
 			
@@ -86,6 +94,7 @@ public class Menu {
 					System.out.println(a);
 				}//end for
 				
+				
 				break;
 			}//end case
 			
@@ -100,6 +109,8 @@ public class Menu {
 				for(Account a : accounts) {
 					System.out.println(a);
 				}//end for
+				
+				log.info("USER RETRIEVED LIST OF ACCOUNTS OWNED BY " + name[0].toUpperCase() + " " + name[1].toUpperCase());
 				
 				break;
 			}//end case
@@ -140,6 +151,8 @@ public class Menu {
 				
 				aDao.addAccount(acc);
 				
+				log.info("USER ADDED ACCOUNT");
+				
 				break;
 			}
 			
@@ -151,6 +164,8 @@ public class Menu {
 				scan.nextLine();
 				
 				aDao.removeAccount(id);
+				
+				log.warn("USER DELETED ACCOUNT No. " + id);
 				
 				break;
 			}
@@ -167,6 +182,8 @@ public class Menu {
 				
 				aDao.makeDeposit(id, amount);
 				
+				log.info("USER DEPOSITED $" + amount + " INTO ACCOUNT No. " + id);
+				
 				break;
 			}
 			
@@ -181,6 +198,8 @@ public class Menu {
 				scan.nextLine();
 				
 				aDao.makeWithdrawl(id, amount);
+				
+				log.warn("USER WITHDREW $" + amount + " FROM ACCOUNT No. " + id);
 				
 				break;
 			}
