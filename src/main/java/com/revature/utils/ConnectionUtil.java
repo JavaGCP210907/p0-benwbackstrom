@@ -18,9 +18,9 @@ public class ConnectionUtil {
 		// Use our database credentials to establish a database connection
 
 		// credentials as Strings, use these strings in a method that gets connections
-		String url = "jdbc:postgresql://localhost:5432/postgres?currentSchema=banking_project";
-		String username = "postgres";
-		String password = "password";
+		String url = System.getenv("URL");
+		String username = System.getenv("USERNAME");
+		String password = System.getenv("PASSWORD");
 
 		// This return statement is what returns our actual database Connection object
 

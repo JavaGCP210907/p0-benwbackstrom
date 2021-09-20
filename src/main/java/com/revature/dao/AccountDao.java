@@ -15,6 +15,32 @@ import com.revature.models.Account;
 import com.revature.utils.ConnectionUtil;
 
 public class AccountDao implements AccountDaoInterface{
+	
+	public static List<Account> fillAccountList(ResultSet rs) throws SQLException {
+		//static method created to have less repeated code to fill List
+		//create an empty list to be filled with the data from the database
+		List<Account> accountList = new ArrayList<>();
+		
+		while(rs.next()) { //while there are results in the Result Set
+			//Create a new Account object from each returned row
+			Account a = new Account(
+					rs.getInt("account_id"),
+					rs.getString("owner_f_name"),
+					rs.getString("owner_l_name"),
+					rs.getString("open_date"),
+					rs.getInt("amount"),
+					rs.getInt("account_type")
+					);
+			
+			//and populate the ArrayList with each new Account object
+			accountList.add(a);
+		}//end while
+		
+		//when there are no more results in the ResultSet the while loop will break
+		return accountList;
+	}
+	
+	//Overriden Methods ------------------------------------------------------------
 
 	@Override
 	public List<Account> getAccounts() {
@@ -34,25 +60,10 @@ public class AccountDao implements AccountDaoInterface{
 			rs = s.executeQuery(sql);
 			
 			//ALL the code above makes a call to our database... Now we need to store the data in a List
-			//create an empty list to be filled with the data from the database
-			List<Account> accountList = new ArrayList<>();
 			
-			while(rs.next()) { //while there are results in the Result Set
-				//Create a new Account object from each returned row
-				Account a = new Account(
-						rs.getInt("account_id"),
-						rs.getString("owner_f_name"),
-						rs.getString("owner_l_name"),
-						rs.getString("open_date"),
-						rs.getInt("amount"),
-						rs.getInt("account_type")
-						);
-				
-				//and populate the ArrayList with each new Account object
-				accountList.add(a);
-			}//end while
+			List<Account> accountList = fillAccountList(rs);
+			//refactored code to call method instead of having while loop directly in this block
 			
-			//when there are no more results in the ResultSet the while loop will break
 			return accountList;
 			
 		}catch(SQLException e) {
@@ -78,23 +89,8 @@ public class AccountDao implements AccountDaoInterface{
 			
 			rs = ps.executeQuery();
 			
-			List<Account> accountList = new ArrayList<>();
+			List<Account> accountList = fillAccountList(rs);
 			
-			while(rs.next()) {
-				Account a = new Account(
-						rs.getInt("account_id"),
-						rs.getString("owner_f_name"),
-						rs.getString("owner_l_name"),
-						rs.getString("open_date"),
-						rs.getInt("amount"),
-						rs.getInt("account_type")
-						);
-				
-				//and populate the ArrayList with each new Account object
-				accountList.add(a);
-			}//end while
-			
-			//when there are no more results in the ResultSet the while loop will break
 			return accountList;
 			
 		}catch(SQLException e) {
@@ -121,20 +117,7 @@ public class AccountDao implements AccountDaoInterface{
 			
 			rs = ps.executeQuery();
 			
-			List<Account> accountList = new ArrayList<>();
-			
-			while(rs.next()) {
-				Account a = new Account(
-						rs.getInt("account_id"),
-						rs.getString("owner_f_name"),
-						rs.getString("owner_l_name"),
-						rs.getString("open_date"),
-						rs.getInt("amount"),
-						rs.getInt("account_type")
-						);
-				
-				accountList.add(a);
-			}//end while
+			List<Account> accountList = fillAccountList(rs);
 			
 			return accountList;
 			
@@ -163,20 +146,7 @@ public class AccountDao implements AccountDaoInterface{
 			
 			rs = ps.executeQuery();
 			
-			List<Account> accountList = new ArrayList<>();
-			
-			while(rs.next()) {
-				Account a = new Account(
-						rs.getInt("account_id"),
-						rs.getString("owner_f_name"),
-						rs.getString("owner_l_name"),
-						rs.getString("open_date"),
-						rs.getInt("amount"),
-						rs.getInt("account_type")
-						);
-				
-				accountList.add(a);
-			}//end while
+			List<Account> accountList = fillAccountList(rs);
 			
 			return accountList;
 			
