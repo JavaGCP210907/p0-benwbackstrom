@@ -195,7 +195,7 @@ public class AccountDao implements AccountDaoInterface{
 		
 		try(Connection conn = ConnectionUtil.getConnection()){
 			
-			String sql = "delete * from accounts where account_id = ?";
+			String sql = "delete from accounts where account_id = ?";
 			
 			PreparedStatement ps = conn.prepareStatement(sql);
 			

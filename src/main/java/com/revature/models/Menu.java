@@ -52,8 +52,8 @@ public class Menu {
 			String input = scan.nextLine();
 			
 			//switch statement that takes input, and delivers appropriate response
-			switch(input) {
-			
+			switch(input.toLowerCase()) {
+			//used .toLowerCase() to help out the user on case for the switch statement
 			case "hi":{
 				System.out.println("Hello there~");
 				break;
